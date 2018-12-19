@@ -12,11 +12,10 @@
 namespace Zephir\Test\FunctionLike\ReturnType;
 
 use PHPUnit\Framework\TestCase;
-use Zephir\FunctionLike\ReturnType\Factory;
-use Zephir\FunctionLike\ReturnType\TypeInterface;
 use Zephir\FunctionLike\ReturnType\CastHint;
-use Zephir\FunctionLike\ReturnType\Collection;
+use Zephir\FunctionLike\ReturnType\Factory;
 use Zephir\FunctionLike\ReturnType\RealType;
+use Zephir\FunctionLike\ReturnType\TypeInterface;
 use Zephir\Types;
 
 class FactoryTest extends TestCase
@@ -24,6 +23,7 @@ class FactoryTest extends TestCase
     /**
      * @test
      * @dataProvider realTypeDataProvider
+     *
      * @param array $ir
      */
     public function shouldCreateRealType(array $ir)
@@ -40,23 +40,23 @@ class FactoryTest extends TestCase
                     'data-type' => Types::T_STRING,
                     'mandatory' => 0,
                     'type' => TypeInterface::TYPE_PARAMETER,
-                ]
+                ],
             ],
             [
                 [
                     'data-type' => Types::T_DOUBLE,
                     'mandatory' => 1,
                     'type' => TypeInterface::TYPE_ANNOTATION,
-                ]
+                ],
             ],
             [
                 [
                     Types::T_INT,
-                ]
+                ],
             ],
             [
                 [
-                    Types::T_UNDEFINED
+                    Types::T_UNDEFINED,
                 ],
             ],
         ];
@@ -65,6 +65,7 @@ class FactoryTest extends TestCase
     /**
      * @test
      * @dataProvider castHintDataProvider
+     *
      * @param array $ir
      */
     public function shouldCreateCastHint(array $ir)
@@ -83,7 +84,7 @@ class FactoryTest extends TestCase
                         'mandatory' => 0,
                     ],
                     'type' => TypeInterface::TYPE_PARAMETER,
-                ]
+                ],
             ],
             [
                 [
@@ -93,7 +94,7 @@ class FactoryTest extends TestCase
                     ],
                     'type' => TypeInterface::TYPE_ANNOTATION,
                     'collection' => 0,
-                ]
+                ],
             ],
             [
                 [
@@ -101,7 +102,7 @@ class FactoryTest extends TestCase
                         'value' => 'Class1',
                     ],
                     'collection' => 1,
-                ]
+                ],
             ],
             [
                 [
@@ -109,12 +110,11 @@ class FactoryTest extends TestCase
                         'value' => null,
                     ],
                     'type' => Types::T_INT,
-                ]
+                ],
             ],
             [
                 [
                     'cast' => [
-
                     ],
                 ],
             ],

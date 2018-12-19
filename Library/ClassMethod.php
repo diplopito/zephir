@@ -224,7 +224,19 @@ class ClassMethod
                 if (isset($returnTypeItem['cast']['collection'])) {
                     continue;
                 }
-                $castTypes[$returnTypeItem['cast']['value']] = $returnTypeItem['cast']['value'];
+
+                if (isset($returnTypeItem['collection']) && $returnTypeItem['collection']) {
+                    $types['array'] = [
+                        'type' => 'return-type-parameter',
+                        'data-type' => 'array',
+                        'mandatory' => 0,
+                        'file' => $returnTypeItem['cast']['file'],
+                        'line' => $returnTypeItem['cast']['line'],
+                        'char' => $returnTypeItem['cast']['char'],
+                    ];
+                } else {
+                    $castTypes[$returnTypeItem['cast']['value']] = $returnTypeItem['cast']['value'];
+                }
             } else {
                 $types[$returnTypeItem['data-type']] = $returnTypeItem;
             }
