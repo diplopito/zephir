@@ -174,7 +174,7 @@ class ClassMethod
      * @param StatementsBlock|null       $statements
      * @param string|null                $docblock
      * @param array|null                 $returnType
-     * @param array|null                 $original
+     * @param array|null                 $expression
      */
     public function __construct(
         ClassDefinition $classDefinition,
@@ -184,9 +184,9 @@ class ClassMethod
         StatementsBlock $statements = null,
         $docblock = null,
         array $returnType = null,
-        array $original = null
+        array $expression = null
     ) {
-        $this->checkVisibility($visibility, $name, $original);
+        $this->checkVisibility($visibility, $name, $expression);
 
         $this->classDefinition = $classDefinition;
         $this->visibility = $visibility;
@@ -194,7 +194,7 @@ class ClassMethod
         $this->parameters = $parameters;
         $this->statements = $statements;
         $this->docblock = $docblock;
-        $this->expression = $original;
+        $this->expression = $expression;
 
         $this->setReturnTypes($returnType);
     }
