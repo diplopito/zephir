@@ -287,6 +287,26 @@ final class Collection extends SplObjectStorage
         return 1 == $summ;
     }
 
+    /**
+     * Returns an array of cast hinted return types (if any).
+     *
+     * @return TypeInterface[]
+     */
+    public function getCastHintedReturnTypes()
+    {
+        return $this->getTypesBySpecification(new Not(new Specification\IsReal()));
+    }
+
+    /**
+     * Returns an array of real return types (if any).
+     *
+     * @return TypeInterface[]
+     */
+    public function getRealReturnTypes()
+    {
+        return $this->getTypesBySpecification(new Specification\IsReal());
+    }
+
     private function isSatisfiedByTypeSpec(SpecificationInterface $spec)
     {
         if (0 == $this->count()) {

@@ -571,4 +571,40 @@ class CollectionTest extends TestCase
         $collection->attach(new RealType(Types::T_NULL));
         $this->assertTrue($collection->areReturnTypesCompatible());
     }
+
+    /** @test */
+    public function shouldGetOnlyRealTypes()
+    {
+        $collection = new Collection();
+        $this->assertCount(0, $collection->getRealReturnTypes());
+
+        $collection->attach(new RealType(Types::T_ARRAY));
+        $this->assertCount(1, $collection->getRealReturnTypes());
+
+        $collection->attach(new RealType(Types::T_CHAR));
+        $collection->attach(new RealType(Types::T_BOOL));
+        $collection->attach(new RealType(Types::T_STRING));
+        $collection->attach(new RealType(Types::T_DOUBLE));
+        $this->assertCount(5, $collection->getRealReturnTypes());
+
+        $collection->attach(new CastHint(Types::T_RESOURCE, null));
+        $this->assertCount(5, $collection->getRealReturnTypes());
+    }
+
+    /** @test */
+    public function shouldGetOnlyCastHint()
+    {
+        $collection = new Collection();
+        $this->assertCount(0, $collection->getCastHintedReturnTypes());
+
+        $collection->attach(new CastHint(Types::T_RESOURCE, null));
+        $this->assertCount(1, $collection->getCastHintedReturnTypes());
+
+        $collection->attach(new RealType(Types::T_ARRAY));
+        $this->assertCount(1, $collection->getCastHintedReturnTypes());
+
+        $collection->attach(new CastHint(Types::T_OBJECT, 'Class1'));
+        $collection->attach(new CastHint(Types::T_CALLABLE, null, null, true));
+        $this->assertCount(3, $collection->getCastHintedReturnTypes());
+    }
 }
